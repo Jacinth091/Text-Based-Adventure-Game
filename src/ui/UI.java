@@ -1,5 +1,6 @@
 package ui;
 
+import main.GameState;
 import userInput.KeyHandler;
 import userInput.MouseHandler;
 import main.GamePanel;
@@ -8,7 +9,7 @@ import java.awt.*;
 
 public class UI {
     private GamePanel gp;
-
+    private Graphics2D g2;
 
     private final Color white = new Color(255,255,255);
     private int[] fontSizes = {40, 30, 20, 15, 10,5};
@@ -27,7 +28,19 @@ public class UI {
     }
 
     public void draw(Graphics2D g2){
-        g2.setFont(arial_40);
+        this.g2 = g2;
+        g2.setFont(arial_40_Bold);
+
+        if(gp.getCurrentState() == GameState.game_PlayState){
+            // Game State = PLAY block
+
+
+        }
+        else if(gp.getCurrentState() == GameState.game_PauseState){
+//            System.out.println("PAUSE!!!!!");
+            drawPauseScreen(g2);
+
+        }
 
 
     }
@@ -46,7 +59,6 @@ public class UI {
 
     }
 
-
     public void drawWindow(Graphics2D g2){
 
         int width = gp.screenWidth - (gp.tileSize * 15); // 1104
@@ -55,7 +67,6 @@ public class UI {
         int x = (gp.screenWidth - width) / 2; // Centered X position
         int y = (gp.screenHeight - height) / 4; // Centered Y position
         drawDialogScreen(g2, x,y,width,height);
-
 
     }
 
@@ -70,12 +81,26 @@ public class UI {
     }
 
     public void drawDebugScreen(Graphics2D g2, MouseHandler mouseIn, KeyHandler keyH){
+        // Mouse Input Debug (temporary)
 
-
-
-        if(keyH.pausedPressed){
+        if(keyH.tKeyPressed){
             drawMousePos(g2,mouseIn);
-
         }
+
+
+    }
+
+
+    public void drawPauseScreen(Graphics2D g2){
+        int width = gp.screenWidth - (gp.tileSize * 15); // 1104
+        int height = gp.tileSize * 4; // 144
+
+        int x = (gp.screenWidth - width) / 2; // Centered X position
+        int y = (gp.screenHeight - height) / 4; // Centered Y position
+        g2.setColor(white);
+        g2.setFont(arial_40_Bold);
+        g2.drawString("PAUSED!", x, y);
+
+
     }
 }

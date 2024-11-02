@@ -20,12 +20,15 @@ public class GamePanel extends JPanel{
 
     // Important Objects
     private final MouseHandler mouseIn = new MouseHandler(this);
-    private final KeyHandler keyH = new KeyHandler();
+    private final KeyHandler keyH = new KeyHandler(this);
     private final UI ui = new UI(this);
-
+    private GameState currentState;
+    private GameState newState;
 
 
     public GamePanel(){
+        currentState = GameState.game_PlayState;
+        newState = GameState.game_DefaultState;
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
@@ -43,15 +46,16 @@ public class GamePanel extends JPanel{
     }
 
     public void update(){
-
+        updateGameState();
     }
 
 
     public void paintComponent(Graphics g){
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
-
-
+        
+        
+        ui.draw(g2);
         ui.drawDebugScreen(g2,mouseIn,keyH);
 
 
@@ -61,7 +65,41 @@ public class GamePanel extends JPanel{
 
 
 
+    public void updateGameState(){
+       if(currentState == GameState.game_PlayState){
 
+//           System.out.println("Game is playing");
+
+        }
+        else if(currentState == GameState.game_PauseState){
+
+//            System.out.println("Game is Paused");
+
+        }
+
+
+
+    }
+
+
+
+
+
+    public GameState getNewState() {
+        return newState;
+    }
+
+    public void setNewState(GameState newState) {
+        this.newState = newState;
+    }
+
+    public GameState getCurrentState() {
+        return currentState;
+    }
+
+    public void setCurrentState(GameState currentState) {
+        this.currentState = currentState;
+    }
 
 
 }

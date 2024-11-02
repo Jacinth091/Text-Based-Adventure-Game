@@ -9,6 +9,7 @@ public class GameEngine implements Runnable {
 
     public GameEngine(GamePanel gp) {
         this.gp = gp;
+
     }
 
     public void start() {
@@ -20,6 +21,11 @@ public class GameEngine implements Runnable {
 
     @Override
     public void run() {
+        gameLoop();
+    }
+
+
+    public void gameLoop(){
         long nanoTime = 1000000000;
         double drawInterval = nanoTime / FPS;
         double delta = 0;
@@ -37,8 +43,8 @@ public class GameEngine implements Runnable {
             lastTime = currentTime;
 
             if (delta >= 1) {
-                gp.update();     // Update game logic
-                gp.repaint();    // Repaint the screen
+                gp.update();
+                gp.repaint();
                 delta--;
                 frameCount++;
             }
@@ -49,4 +55,5 @@ public class GameEngine implements Runnable {
             }
         }
     }
+
 }
