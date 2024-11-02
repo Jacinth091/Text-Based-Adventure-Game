@@ -68,12 +68,10 @@ public class GamePanel extends JPanel{
     public void updateGameState(){
        if(currentState == GameState.game_PlayState){
 
-//           System.out.println("Game is playing");
 
         }
         else if(currentState == GameState.game_PauseState){
 
-//            System.out.println("Game is Paused");
 
         }
 

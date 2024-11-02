@@ -65,8 +65,6 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
         mouseX = e.getX();
         mouseY = e.getY();
         isDragging = true; // Set dragging status
-//        System.out.println("Dragging at: (" + mouseX + ", " + mouseY + ")");
-//        System.out.println("Mouse dragged!");
 
     }
 

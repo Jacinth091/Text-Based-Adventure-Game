@@ -11,15 +11,15 @@ public class UI {
     private GamePanel gp;
     private Graphics2D g2;
 
+    private Rectangle[] userOptions;
+    private Rectangle[] eventOptions;
+
     private final Color white = new Color(255,255,255);
     private int[] fontSizes = {40, 30, 20, 15, 10,5};
     private Font arial_40 = new Font("Arial", Font.PLAIN, 40);
     private Font arial_40_Bold = new Font("Arial", Font.BOLD, 40);
-
-
     private Font arial_20 = new Font("Arial", Font.PLAIN, 20);
     private Font arial_20_Bold = new Font("Arial", Font.BOLD, 20);
-
     private Font arial_15 = new Font("Arial", Font.PLAIN, 15);
     private Font arial_15_Bold = new Font("Arial", Font.BOLD, 15);
 
@@ -33,7 +33,7 @@ public class UI {
 
         if(gp.getCurrentState() == GameState.game_PlayState){
             // Game State = PLAY block
-
+            drawWindow(g2);
 
         }
         else if(gp.getCurrentState() == GameState.game_PauseState){
@@ -89,7 +89,6 @@ public class UI {
 
 
     }
-
 
     public void drawPauseScreen(Graphics2D g2){
         int width = gp.screenWidth - (gp.tileSize * 15); // 1104
