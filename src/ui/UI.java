@@ -1,5 +1,6 @@
 package ui;
 
+import userInput.KeyHandler;
 import userInput.MouseHandler;
 import main.GamePanel;
 
@@ -7,7 +8,10 @@ import java.awt.*;
 
 public class UI {
     private GamePanel gp;
-    private int fontSize = 30;
+
+
+    private final Color white = new Color(255,255,255);
+    private int[] fontSizes = {40, 30, 20, 15, 10,5};
     private Font arial_40 = new Font("Arial", Font.PLAIN, 40);
     private Font arial_40_Bold = new Font("Arial", Font.BOLD, 40);
 
@@ -31,8 +35,7 @@ public class UI {
 
     public void drawMousePos(Graphics2D g2, MouseHandler mouseIn){
 
-
-        g2.setColor(Color.CYAN);
+        g2.setColor(white);
         String status = mouseIn.isDragging() ? "Dragging" :
                 mouseIn.isClicking() ? "Clicking" :
                         mouseIn.isMoving() ? "Moving" : "Idle";
@@ -41,7 +44,38 @@ public class UI {
         g2.setFont(arial_15);
         g2.drawString(format, 10, 20);
 
+    }
+
+
+    public void drawWindow(Graphics2D g2){
+
+        int width = gp.screenWidth - (gp.tileSize * 15); // 1104
+        int height = gp.tileSize * 4; // 144
+
+        int x = (gp.screenWidth - width) / 2; // Centered X position
+        int y = (gp.screenHeight - height) / 4; // Centered Y position
+        drawDialogScreen(g2, x,y,width,height);
+
 
     }
 
+    public void drawDialogScreen(Graphics2D g2, int x, int y, int width, int height){
+        int arcWidth = 5, arcHeight = 5;
+        g2.setColor(Color.gray);
+        g2.fillRoundRect(x, y, width, height, arcWidth + 2, arcHeight+2);
+
+        g2.setStroke(new BasicStroke(5));
+        g2.setColor(white);
+        g2.drawRoundRect(x+5, y+5, width -10, height-10, arcWidth, arcHeight );
+    }
+
+    public void drawDebugScreen(Graphics2D g2, MouseHandler mouseIn, KeyHandler keyH){
+
+
+
+        if(keyH.pausedPressed){
+            drawMousePos(g2,mouseIn);
+
+        }
+    }
 }

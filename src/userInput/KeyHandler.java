@@ -22,7 +22,12 @@ public class KeyHandler implements KeyListener {
 
         switch(keyCode){
             case KeyEvent.VK_P:
-                pausedPressed = value;
+                if(pausedPressed){
+                    pausedPressed = false;
+                }
+                else if(!pausedPressed){
+                    pausedPressed = true;
+                }
                 break;
             case KeyEvent.VK_ESCAPE:
                 escPressed = value;
@@ -35,13 +40,13 @@ public class KeyHandler implements KeyListener {
     public void keyReleased(KeyEvent e) {
         value =false;
         keyCode = e.getKeyCode();
-        switch(keyCode){
-            case KeyEvent.VK_P:
-                pausedPressed = value;
-                break;
-            case KeyEvent.VK_ESCAPE:
-                escPressed = value;
-                break;
-        }
+//        switch(keyCode){
+//            case KeyEvent.VK_P:
+//                pausedPressed = value;
+//                break;
+//            case KeyEvent.VK_ESCAPE:
+//                escPressed = value;
+//                break;
+//        }
     }
 }

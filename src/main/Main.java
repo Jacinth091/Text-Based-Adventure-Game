@@ -26,7 +26,6 @@ public class Main {
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setResizable(false);
         app.setLayout(new GridLayout(1, 1));
-//        app.setPreferredSize(new Dimension(mp.screenWidth + 100, mp.screenHeight + (mp.screenHeight / 3)));
 
 
         JPanel container = new JPanel();

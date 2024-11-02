@@ -30,6 +30,7 @@ public class GamePanel extends JPanel{
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
+        this.setLayout(null);
 
         // Listeners
 //
@@ -37,9 +38,9 @@ public class GamePanel extends JPanel{
         this.addMouseListener(mouseIn);
         this.addMouseMotionListener(mouseIn);
 
+
+
     }
-
-
 
     public void update(){
 
@@ -50,10 +51,8 @@ public class GamePanel extends JPanel{
         super.paintComponent(g);
         Graphics2D g2 = (Graphics2D) g;
 
-        if(keyH.escPressed){
-            ui.drawMousePos(g2,mouseIn);
 
-        }
+        ui.drawDebugScreen(g2,mouseIn,keyH);
 
 
         g2.dispose();
