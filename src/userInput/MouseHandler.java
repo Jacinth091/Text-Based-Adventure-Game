@@ -23,7 +23,7 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         // Handle mouse click event if needed
-        isClicking = true; // Set clicking status to true
+//        isClicking = true; // Set clicking status to true
 //        System.out.println("CLicked at: (" + e.getX() + ", " + e.getY() + ")");
 
     }
