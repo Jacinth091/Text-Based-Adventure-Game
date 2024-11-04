@@ -10,7 +10,7 @@ import java.awt.*;
 public class UI {
     private GamePanel gp;
     private Graphics2D g2;
-
+    int count =0;
     private Rectangle[] userOptions;
     private Rectangle[] eventOptions;
 
@@ -33,7 +33,7 @@ public class UI {
 
         if(gp.getCurrentState() == GameState.game_PlayState){
             // Game State = PLAY block
-            drawWindow(g2);
+            drawPlayerUi(g2);
 
         }
         else if(gp.getCurrentState() == GameState.game_PauseState){
@@ -44,6 +44,37 @@ public class UI {
 
 
     }
+
+
+    public void drawPlayerUi(Graphics2D g2){
+        int width = gp.screenWidth; // 1104
+        int height = gp.tileSize * 4; // 144
+
+        int x = (gp.screenWidth - width) / 2; // Centered X position
+        int y = (gp.screenHeight - height); // Centered Y position
+        count++;
+        drawUIWindow(g2, x,y,width,height);
+
+    }
+
+    public void drawUIWindow(Graphics2D g2, int x, int y, int width, int height){
+        // Main Hud South Part
+        g2.setStroke(new BasicStroke(5));
+        g2.setColor(Color.green);
+        g2.drawRect(x+5, y+5, width-10, height-10);
+
+
+
+
+
+
+
+    }
+
+
+
+
+
 
 
     public void drawMousePos(Graphics2D g2, MouseHandler mouseIn){

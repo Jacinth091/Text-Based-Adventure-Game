@@ -19,6 +19,7 @@ public class Main {
         Border emptyBorder = BorderFactory.createEmptyBorder(10,10,10,10);
         Border pinkBorder = BorderFactory.createLineBorder(Color.pink, 10);
         Border compoundBorder = BorderFactory.createCompoundBorder(pinkBorder, emptyBorder);
+
         JFrame app = new JFrame();
         GamePanel gp = new GamePanel();
         GameEngine gameEng = new GameEngine(gp);
@@ -29,7 +30,7 @@ public class Main {
 
 
         JPanel container = new JPanel();
-        container.setBorder(compoundBorder);
+        container.setBorder(emptyBorder);
 
         container.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
