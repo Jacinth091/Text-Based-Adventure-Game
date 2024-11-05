@@ -1,5 +1,6 @@
 package main;
 
+import entity.Player;
 import userInput.KeyHandler;
 import userInput.MouseHandler;
 import ui.UI;
@@ -21,6 +22,9 @@ public class GamePanel extends JPanel{
     // Important Objects
     private final MouseHandler mouseIn = new MouseHandler(this);
     private final KeyHandler keyH = new KeyHandler(this);
+    private final Player player = new Player("Cedric", "Researcher");
+
+
     private final UI ui = new UI(this);
     private GameState currentState;
     private GameState newState;
@@ -81,6 +85,14 @@ public class GamePanel extends JPanel{
 
 
 
+
+    public void updateGameStats(){
+
+    }
+
+    public Player getPlayer(){
+        return player;
+    }
 
 
     public GameState getNewState() {

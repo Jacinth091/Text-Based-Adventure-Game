@@ -5,8 +5,8 @@ public class Enemy extends Entity implements Actionable{
 
 
 
-    public Enemy(String name, String desc, int health){
-        super(name, desc,health);
+    public Enemy(String name, String desc){
+        super(name, desc);
     }
 
 

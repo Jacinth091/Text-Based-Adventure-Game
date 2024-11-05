@@ -7,6 +7,11 @@ public class Entity{
     private int entHealth;
 
 
+    public Entity(String entName, String entDesc){
+        this.entName = entName;
+        this.entDesc = entDesc;
+    }
+
     public Entity(String entName, String entDesc, int entHealth){
         this.entName = entName;
         this.entDesc = entDesc;
@@ -14,7 +19,17 @@ public class Entity{
     }
 
 
+    public String getEntName() {
+        return entName;
+    }
 
+    public String getEntDesc() {
+        return entDesc;
+    }
+
+    public int getEntHealth() {
+        return entHealth;
+    }
 
 
 }
