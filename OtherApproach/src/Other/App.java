@@ -1,37 +1,48 @@
-package main;
+package Other;
 
-import ui.Utility;
+
+import jdk.jshell.execution.Util;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
-public class Main {
 
-    private static Utility util = new Utility();
+public class App extends JFrame {
+    private Utility util;
+    private GameScreen gs;
+    private UI ui;
 
-    public static void main(String[ ]args){
+    private JPanel screenContainer;
 
-        appStart();
+    public App(GameScreen gs, UI ui) {
+        this.gs = gs;
+        this.ui = ui;
+//        this.setPreferredSize(new Dimension(, height));
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        util = new Utility();
 
-
+        initComponents();
 
 
     }
 
-    public static void appStart() {
-
-        JFrame app = new JFrame();
-        GamePanel gp = new GamePanel();
-        HudPanel hud = new HudPanel();
-        GameEngine gameEng = new GameEngine(gp);
-        app.setTitle("Text Based - Adventure Game");
-        app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        app.setResizable(false);
-        app.setLayout(new GridLayout(1, 1));
+    public App(int width, int height, String title) {
+        this.setPreferredSize(new Dimension(width, height));
+        this.setTitle(title);
+        this.setResizable(false);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
-        JPanel screenContainer = new JPanel();
+//        initComponents();
+
+    }
+
+    public void initComponents(){
+
+
+
+        screenContainer = new JPanel();
         screenContainer = util.createPanel(Color.white, util.setBorderLayout(5, 5), true);
         screenContainer.setBorder(util.compoundBorder);
         screenContainer.setLayout(new GridBagLayout());
@@ -45,7 +56,7 @@ public class Main {
         gbc.weightx = 1.0;          // Expand horizontally
         gbc.weighty = 1.0;          // Take available vertical space
         gbc.fill = GridBagConstraints.BOTH; // Fill space both horizontally and vertically
-        screenContainer.add(gp, gbc);
+        screenContainer.add(gs, gbc);
 
         // Bottom component (ui)
         gbc.gridx = 0;
@@ -53,18 +64,14 @@ public class Main {
         gbc.weightx = 1.0;
         gbc.weighty = 0;            // No extra vertical space, stays at the bottom
         gbc.fill = GridBagConstraints.HORIZONTAL; // Fill only horizontally
-        screenContainer.add(hud, gbc);
-//        gbc.anchor = GridBagConstraints.CENTER;
+        screenContainer.add(ui, gbc);
+
+        add(screenContainer);
+
+        revalidate();
+        pack();
 
 
-
-        app.add(screenContainer);
-        app.pack();
-        app.setLocationRelativeTo(null);
-        app.setVisible(true);
-
-
-        gameEng.start();
     }
 
 
