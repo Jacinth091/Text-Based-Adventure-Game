@@ -44,7 +44,13 @@ public class GameEngine implements Runnable {
 
             if (delta >= 1) {
                 gp.update();
-                gp.repaint();
+//                try{
+//                    gp.repaint();
+//                    Thread.sleep(500);
+//
+//                }catch(InterruptedException e){
+//                    e.printStackTrace();
+//                }
                 delta--;
                 frameCount++;
             }

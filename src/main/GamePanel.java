@@ -1,20 +1,22 @@
 package main;
 
 import entity.Player;
+import ui.Utility;
 import userInput.KeyHandler;
 import userInput.MouseHandler;
 import ui.UI;
 
-import javax.swing.JPanel;
+import javax.swing.*;
 import java.awt.*;
 
 public class GamePanel extends JPanel{
+    private final Utility util = new Utility();
     final int origTileSize = 16; // 16x16 tile
     final int scale =2;
     final public int tileSize = origTileSize * scale; // 48x48 tile size displayed on screen
     // 1200 x 720 screen size
     public final int maxScreenCol = 25;
-    public final int maxScreenRow = 15;
+    public final int maxScreenRow = 11;
     // Screen Width and Height Settings
     public final int screenWidth = tileSize * maxScreenCol; // 48 * 25 = 1200 screen width
     public final int screenHeight = tileSize * maxScreenRow; // 48 * 15 = 720 screen height
@@ -37,7 +39,18 @@ public class GamePanel extends JPanel{
         this.setBackground(Color.black);
         this.setDoubleBuffered(true);
         this.setFocusable(true);
-        this.setLayout(null);
+//        this.setLayout();
+
+        JButton btn = util.createButton("Click Me", Color.WHITE, util.createLineBorder(Color.black, 10),Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        btn.setBounds(100, 100, screenWidth/2, screenHeight/2);
+
+        btn.addActionListener(e -> {
+
+
+
+
+        });
+        this.add(btn);
 
         // Listeners
 //
@@ -54,17 +67,17 @@ public class GamePanel extends JPanel{
     }
 
 
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-        
-        
-        ui.draw(g2);
-        ui.drawDebugScreen(g2,mouseIn,keyH);
-
-
-        g2.dispose();
-    }
+//    public void paintComponent(Graphics g){
+//        super.paintComponent(g);
+//        Graphics2D g2 = (Graphics2D) g;
+//
+//
+//        ui.draw(g2);
+//        ui.drawDebugScreen(g2,mouseIn,keyH);
+//
+//
+//        g2.dispose();
+//    }
 
 
 
