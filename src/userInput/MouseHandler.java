@@ -1,7 +1,7 @@
 package userInput;
 
 
-import main.GamePanel;
+import main.GameLogic;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -14,10 +14,10 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
     private boolean isClicking = false;
     private boolean isMoving = false;
 
-    private GamePanel gp;
+    private final GameLogic gameLogic;
 
-    public MouseHandler(GamePanel gp) {
-        this.gp = gp;
+    public MouseHandler(GameLogic gameLogic) {
+        this.gameLogic = gameLogic;
     }
 
     @Override

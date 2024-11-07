@@ -3,28 +3,32 @@ package main;
 import ui.Utility;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class Main {
 
-    private static Utility util = new Utility();
-
     public static void main(String[ ]args){
-
-        appStart();
-
+        String appTitle = "Adventure Game";
+        GameLogic gameLogic = new GameLogic();
+        GameThread gameThread = new GameThread(gameLogic);
+        GameApp gameApp = new GameApp(gameLogic, appTitle);
+        gameThread.start();
 
 
 
     }
 
-    public static void appStart() {
+/*    public static void appStart() {
 
         JFrame app = new JFrame();
-        GamePanel gp = new GamePanel();
-        GameHud hud = new GameHud();
-        GameEngine gameEng = new GameEngine(gp);
+        GameLogic gL = new GameLogic();
+
+        GamePanel gp = new GamePanel(gL);
+        GameHud hud = new GameHud(gL);
+
+
+
+        GameThread gameEng = new GameThread(gL);
         app.setTitle("Text Based - Adventure Game");
         app.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         app.setResizable(false);
@@ -65,7 +69,7 @@ public class Main {
 
 
         gameEng.start();
-    }
+    }*/
 
 
 }

@@ -1,16 +1,9 @@
 package ui;
 
-import entity.Actionable;
 import entity.Player;
-import main.GameState;
-import userInput.KeyHandler;
-import userInput.MouseHandler;
-import main.GamePanel;
+import main.GameLogic;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.Timer;
 
 public class UI {
 
@@ -18,7 +11,7 @@ public class UI {
 
 
 
-    private GamePanel gp;
+    private GameLogic gameLogic;
     private Graphics2D g2;
     private Player player;
     int count =0;
@@ -44,14 +37,14 @@ public class UI {
 
 
 
-    public UI(GamePanel gp) {
-        this.gp = gp;
+    public UI(GameLogic gameLogic) {
+        this.gameLogic = gameLogic;
     }
 
 
-    public void draw(Graphics2D g2){
+/*    public void draw(Graphics2D g2){
         this.g2 = g2;
-        player = gp.getPlayer();
+        player = gameLogic.getPlayer();
         g2.setFont(ui.arial_40_Bold);
 
         drawPlayerUi(g2);
@@ -98,7 +91,7 @@ public class UI {
 //        drawBar(g2, barX, barY, barWidth, barHeight, ui.red, playerHp, maxHp);
 
 
-/*        bar;
+*//*        bar;
         int sanityX = x + 20;
         int sanityY = hpY + hpHeight + 10; // Position below HP bar
         drawBar(g2, sanityX, sanityY, sanityBarWidth, hpHeight, Color.BLUE, playerSanity, maxSanity);
@@ -125,7 +118,7 @@ public class UI {
         int slotSize = gp.tileSize; // Adjust slot size
         int inventoryX = x + width - ((slotSize * 7) ); // Right side of HUD
         int inventoryY = y + (gp.screenHeight / 6);
-        drawInventory(g2, inventoryX, inventoryY, slotSize);*/
+        drawInventory(g2, inventoryX, inventoryY, slotSize);*//*
 
     }
 
@@ -141,7 +134,7 @@ public class UI {
 
         drawBars(g2);
 
-/*        // Draw Sanity Bar
+*//*        // Draw Sanity Bar
         barWidth = (int)(boxWidth * 0.3); // Adjust bar width as needed
         barHeight = 25;
         barX = xBox + 20;
@@ -168,7 +161,7 @@ public class UI {
         barHeight = 25;
         barX = xBox + 20;
         barY = yBox + 60;
-        drawBar(g2, barX, barY, barWidth, barHeight, ui.barColors[3], player.getPlayerStealth(), player.getMaxStealth(), "Stealth");*/
+        drawBar(g2, barX, barY, barWidth, barHeight, ui.barColors[3], player.getPlayerStealth(), player.getMaxStealth(), "Stealth");*//*
 
 
 
@@ -326,5 +319,5 @@ public class UI {
         g2.drawString("PAUSED!", x, y);
 
 
-    }
+    }*/
 }

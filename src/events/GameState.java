@@ -1,4 +1,4 @@
-package main;
+package events;
 
 public enum GameState {
 

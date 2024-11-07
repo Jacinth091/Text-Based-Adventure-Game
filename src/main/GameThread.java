@@ -1,14 +1,15 @@
 package main;
 
-public class GameEngine implements Runnable {
+public class GameThread implements Runnable {
 
     private Thread gameThread;
     private final int FPS = 24;
 
-    private final GamePanel gp;
+    private final GameLogic gameLogic;
 
-    public GameEngine(GamePanel gp) {
-        this.gp = gp;
+    public GameThread(GameLogic gameLogic) {
+        this.gameLogic = gameLogic;
+
 
     }
 
@@ -43,14 +44,8 @@ public class GameEngine implements Runnable {
             lastTime = currentTime;
 
             if (delta >= 1) {
-                gp.update();
-//                try{
-//                    gp.repaint();
-//                    Thread.sleep(500);
-//
-//                }catch(InterruptedException e){
-//                    e.printStackTrace();
-//                }
+                gameLogic.update();
+
                 delta--;
                 frameCount++;
             }
