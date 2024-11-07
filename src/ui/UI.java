@@ -91,7 +91,8 @@ public class UI {
 //        drawBar(g2, barX, barY, barWidth, barHeight, ui.red, playerHp, maxHp);
 
 
-*//*        bar;
+*/
+    /*        bar;
         int sanityX = x + 20;
         int sanityY = hpY + hpHeight + 10; // Position below HP bar
         drawBar(g2, sanityX, sanityY, sanityBarWidth, hpHeight, Color.BLUE, playerSanity, maxSanity);

@@ -29,6 +29,9 @@ public class Utility {
     public Font arial_15 = new Font("Arial", Font.PLAIN, 15);
     public Font arial_15_Bold = new Font("Arial", Font.BOLD, 15);
 
+    public Font titleFont = new Font("Times New Roman", Font.PLAIN, 90);
+    public Font normalFont = new Font("Times New Roman", Font.PLAIN, 24);
+
 
     Border emptyBorder = BorderFactory.createEmptyBorder(10,10,10,10);
     Border pinkBorder = BorderFactory.createLineBorder(Color.pink, 10);

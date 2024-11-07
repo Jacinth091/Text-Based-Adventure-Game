@@ -46,6 +46,7 @@ public class GameThread implements Runnable {
             if (delta >= 1) {
                 gameLogic.update();
 
+
                 delta--;
                 frameCount++;
             }

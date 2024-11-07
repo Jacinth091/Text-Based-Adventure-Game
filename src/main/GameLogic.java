@@ -41,13 +41,27 @@ public class GameLogic{
         notifyGameUpdates();
 
         if(currentState == GameState.game_PlayState){
-
+            getMousePos();
 
         }
         else if(currentState == GameState.game_PauseState){
             System.out.println("Pause");
 
         }
+    }
+
+
+    public void getMousePos(){
+        if(keyH.tKeyPressed){
+            String status = mouseIn.isDragging() ? "Dragging" :
+                    mouseIn.isClicking() ? "Clicking" :
+                            mouseIn.isMoving() ? "Moving" : "Idle";
+
+            String format = String.format("Mouse x: %d Mouse Y: %d Status: %s", mouseIn.getMouseX(), mouseIn.getMouseY(), status);
+
+            System.out.println(format);
+        }
+
     }
 
     public void addEventUpdate(GameUpdate eventUpdate){

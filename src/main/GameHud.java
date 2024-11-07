@@ -17,7 +17,7 @@ public class GameHud extends JPanel implements GameUpdate {
     final int scale =2;
     final public int tileSize = origTileSize * scale; // 48x48 tile size displayed on screen
     // 1200 x 720 screen size
-    public final int maxScreenCol = 20;
+    public final int maxScreenCol = 23;
     public final int maxScreenRow = 3;
     // Screen Width and Height Settings
     public final int screenWidth = tileSize * maxScreenCol; // 48 * 25 = 1200 screen width
@@ -25,7 +25,7 @@ public class GameHud extends JPanel implements GameUpdate {
 
     public GameHud(GameLogic gameLogic){
         this.gameLogic = gameLogic;
-
+        gameLogic.addEventUpdate(this);
         this.setPreferredSize(new Dimension(screenWidth, screenHeight));
         this.setBackground(Color.pink);
         this.setDoubleBuffered(true);

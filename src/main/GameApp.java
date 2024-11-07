@@ -45,17 +45,16 @@ public class GameApp extends JFrame {
 
 
         gbc = new GridBagConstraints();
-        // Center component (gs)
         gbc.gridx = 0;
-        gbc.gridy = 0;
-//        gbc.weightx = 1.0;          // Expand horizontally
-//        gbc.weighty = 1.0;          // Take available vertical space
+        gbc.gridy = 1;
+        gbc.weightx = 1.0;          // Expand horizontally
+        gbc.weighty = 1.0;          // Take available vertical space
         gbc.fill = GridBagConstraints.BOTH; // Fill space both horizontally and vertically
         parentContainer.add(gPanel, gbc);
 
         // Bottom component (ui)
         gbc.gridx = 0;
-        gbc.gridy = 1;
+        gbc.gridy = 0;
         gbc.weightx = 1.0;
         gbc.weighty = 0;            // No extra vertical space, stays at the bottom
         gbc.fill = GridBagConstraints.HORIZONTAL; // Fill only horizontally
