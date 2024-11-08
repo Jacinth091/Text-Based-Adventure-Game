@@ -29,6 +29,7 @@ public class GameHud extends UI implements GameUpdate, ActionListener, ItemListe
     public void initComponents(){
         setLayout(new GridBagLayout());
         setBackground(Color.orange);
+        System.out.println("Beta Branch");
 
 
 
