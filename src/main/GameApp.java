@@ -1,5 +1,6 @@
 package main;
 
+import ui.UI;
 import ui.Utility;
 
 import javax.swing.*;
@@ -8,6 +9,7 @@ import java.awt.*;
 public class GameApp extends JFrame {
 
     private final GameLogic gameLogic;
+    private final UI gameUI;
     private final GamePanel gPanel;
     private final GameHud gHud;
     private final Utility util = new Utility();
@@ -22,6 +24,7 @@ public class GameApp extends JFrame {
     public GameApp(GameLogic gameLogic, String title){
         this.gameLogic = gameLogic;
         this.title = title;
+        gameUI = new UI(gameLogic);
         gPanel = new GamePanel(gameLogic);
         gHud = new GameHud(gameLogic);
 

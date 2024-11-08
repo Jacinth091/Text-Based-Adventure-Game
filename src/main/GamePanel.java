@@ -1,10 +1,8 @@
 package main;
 
 import events.GameUpdate;
-import ui.Utility;
-import userInput.KeyHandler;
-import userInput.MouseHandler;
 import ui.UI;
+import ui.Utility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,21 +11,10 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-public class GamePanel extends JPanel implements GameUpdate, ActionListener, ItemListener {
-    private final Utility util = new Utility();
-    private GameLogic gameLogic;
-    final int origTileSize = 16; // 16x16 tile
-    final int scale =2;
-    final public int tileSize = origTileSize * scale; // 48x48 tile size displayed on screen
-    // 1200 x 720 screen size
-    public final int maxScreenCol = 23;
-    public final int maxScreenRow = 15;
-    // Screen Width and Height Settings
-    public final int screenWidth = tileSize * maxScreenCol; // 48 * 25 = 1200 screen width
-    public final int screenHeight = tileSize * maxScreenRow; // 48 * 15 = 720 screen height
-
+public class GamePanel extends UI implements GameUpdate, ActionListener, ItemListener {
+    private int screenHeight;
     // UI Elements
-    private GridBagConstraints gbc;
+
     private boolean doneInitialize = false;
     private String[] toggleCardsTitle = {
             "Settings",
@@ -54,19 +41,11 @@ public class GamePanel extends JPanel implements GameUpdate, ActionListener, Ite
 
 
     public GamePanel(GameLogic gameLogic){
-        this.gameLogic = gameLogic;
-        gameLogic.addEventUpdate(this);
-        this.setPreferredSize(new Dimension(screenWidth, screenHeight));
-        this.setBackground(Color.gray);
-        this.setDoubleBuffered(true);
-        this.setFocusable(true);
-//        this.setLayout();
-
-
-        // Listeners
-        this.addKeyListener(gameLogic.getKeyH());
-        this.addMouseListener(gameLogic.getMouseIn());
-        this.addMouseMotionListener(gameLogic.getMouseIn());
+        super(gameLogic);
+        getGameLogic().addEventUpdate(this);
+        maxScreenRow = 15;
+        this.screenHeight = tileSize * maxScreenRow;
+        this.setPreferredSize(new Dimension(screenWidth,this.screenHeight));
 
 
         initComponent();
@@ -107,6 +86,9 @@ public class GamePanel extends JPanel implements GameUpdate, ActionListener, Ite
             uiToggleBtns[i].addActionListener(this);
 //            uiToggleBtns[i].addItemListener(this);
         }
+
+
+
 
 
 
