@@ -3,6 +3,7 @@ package main;
 import entity.Player;
 import events.GameState;
 import events.GameUpdate;
+import map.GameMap;
 import ui.Utility;
 import userInput.KeyHandler;
 import userInput.MouseHandler;
@@ -15,14 +16,24 @@ public class GameLogic{
     private GameState currentState;
     private final ArrayList<GameUpdate> updates = new ArrayList<>();
 
+    // Entities
     private final Player player = new Player("Cedric", "Researcher");
+    private final EnemySpawnerThread enemySpawner = new EnemySpawnerThread(this);
+
+
+
     private  MouseHandler mouseIn;
     private  KeyHandler keyH;
 
-
+    // Game Map
+    private GameMap gameMap;
 
     public GameLogic(){
+        this.gameMap = new GameMap();
         currentState = GameState.game_PlayState;
+
+        enemySpawner.start();
+
         mouseIn = new MouseHandler(this);
         keyH = new KeyHandler(this);
 

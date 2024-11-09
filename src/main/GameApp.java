@@ -12,6 +12,7 @@ public class GameApp extends JFrame {
     private final UI gameUI;
     private final GamePanel gPanel;
     private final GameHud gHud;
+    private EnemySpawnerThread enemySpawner;
     private final Utility util = new Utility();
 
     private String title;
