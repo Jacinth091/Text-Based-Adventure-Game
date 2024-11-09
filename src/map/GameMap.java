@@ -26,7 +26,11 @@ public class GameMap {
     }
 
 
+    public Map<String, Map<String, Room>> getGameMap() {
+        return gameMap;
+    }
 
-
-
+    public void setGameMap(Map<String, Map<String, Room>> gameMap) {
+        this.gameMap = gameMap;
+    }
 }

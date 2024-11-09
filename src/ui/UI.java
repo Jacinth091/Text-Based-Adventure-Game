@@ -10,13 +10,14 @@ public class UI extends JPanel {
 
     public final Utility util = new Utility();
     // 1200 x 720 screen size
-    public final int maxScreenCol = 23;
+    public int maxScreenCol = 23;
+    public int maxScreenRow = 17;
+
     final int origTileSize = 16; // 16x16 tile
     final int scale =2;
     final public int tileSize = origTileSize * scale; // 48x48 tile size displayed on screen
     // Screen Width and Height Settings
     public final int screenWidth = tileSize * maxScreenCol; // 48 * 25 = 1200 screen width
-    public int maxScreenRow = 17;
     public final int screenHeight = tileSize * maxScreenRow; // 48 * 15 = 720 screen height
 
 

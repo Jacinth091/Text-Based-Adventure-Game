@@ -74,7 +74,7 @@ public class GamePanel extends UI implements GameUpdate, ActionListener, ItemLis
         setMainGameScreen();
 
         // Buttons Panel & Buttons
-        uiBtnPanel = util.createPanel(Color.WHITE, new GridLayout(5,1,10,40) , true);
+        uiBtnPanel = util.createPanel(Color.BLACK, new GridLayout(5,1,10,40) , true);
         uiBtnPanel.setPreferredSize(new Dimension(70, 0));
         uiBtnPanel.setBorder(util.createEmptyBorder(10,10,10,10));
 
@@ -156,7 +156,7 @@ public class GamePanel extends UI implements GameUpdate, ActionListener, ItemLis
         panelConts = new JPanel[2];
         for(int i=0; i < panelConts.length; i++){
             panelConts[i] = util.createPanel(Color.BLACK, new GridBagLayout(),true);
-            panelConts[i].setBorder(util.createLineBorder(Color.WHITE, 5));
+//            panelConts[i].setBorder(util.createLineBorder(Color.WHITE, 5));
 
         }
         panelConts[0].setPreferredSize(new Dimension(100, 100));
