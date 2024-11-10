@@ -32,9 +32,9 @@ public class GameMap {
 
         setGameMap();
 
-        debugMap();
-
-        System.out.println(gameMap.get(roomNames[1]).getRoomViaDirection("West"));
+//        debugMap();
+//
+//        System.out.println(gameMap.get(roomNames[1]).getRoomViaDirection("West"));
     }
 
 
@@ -135,6 +135,11 @@ public class GameMap {
     }
 
 
+    public Room[] getRooms() {
+        return rooms;
+    }
 
-
+    public void setRooms(Room[] rooms) {
+        this.rooms = rooms;
+    }
 }

@@ -47,14 +47,14 @@ public class KeyHandler implements KeyListener {
             case KeyEvent.VK_P:
                 if(!pausedPressed){
                     pausedPressed = true;
-                    if(gameLogic.getCurrentState() == GameState.game_PlayState){
-                        gameLogic.setCurrentState(GameState.game_PauseState);
+                    if(gameLogic.getCurrentState() == GameState.state_PlayState){
+                        gameLogic.setCurrentState(GameState.state_PauseState);
                     }
                 }
                 else if(pausedPressed){
                     pausedPressed = false;
-                    if(gameLogic.getCurrentState() == GameState.game_PauseState){
-                        gameLogic.setCurrentState(GameState.game_PlayState);
+                    if(gameLogic.getCurrentState() == GameState.state_PauseState){
+                        gameLogic.setCurrentState(GameState.state_PlayState);
                     }
                 }
                 break;

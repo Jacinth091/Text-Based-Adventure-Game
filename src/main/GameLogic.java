@@ -8,18 +8,27 @@ import ui.Utility;
 import userInput.KeyHandler;
 import userInput.MouseHandler;
 
+import javax.swing.Timer;
 import java.util.ArrayList;
 
 
+
 public class GameLogic{
+
+
+    // Threads
+    private final EnemySpawnerThread enemySpawner = new EnemySpawnerThread(this);
+    private Timer timer;
+    private long timeRemainingInSeconds = 30 * 60;
+    private long timerMinutes = 30;
+
     private final Utility util = new Utility();
     private GameState currentState;
     private final ArrayList<GameUpdate> updates = new ArrayList<>();
 
     // Entities
     private final Player player = new Player("Cedric", "Researcher");
-    private final EnemySpawnerThread enemySpawner = new EnemySpawnerThread(this);
-
+    private long timerSeconds = 0;
 
 
     private  MouseHandler mouseIn;
@@ -30,8 +39,8 @@ public class GameLogic{
 
     public GameLogic(){
         this.gameMap = new GameMap();
-        currentState = GameState.game_PlayState;
-
+        currentState = GameState.state_PlayState;
+        createTimer();
         enemySpawner.start();
 
         mouseIn = new MouseHandler(this);
@@ -40,6 +49,8 @@ public class GameLogic{
 
 
     }
+
+
 
     public void update(){
         updateGameState();
@@ -51,15 +62,77 @@ public class GameLogic{
     public void updateGameState(){
         notifyGameUpdates();
 
-        if(currentState == GameState.game_PlayState){
+        if(currentState == GameState.state_PlayState){
             getMousePos();
+            startTimer();
 
         }
-        else if(currentState == GameState.game_PauseState){
-            System.out.println("Pause");
+        else if(currentState == GameState.state_PauseState){
+            pauseTimer();
+            try{
+                System.out.println("GAme is Paused!");
+                Thread.sleep(1000);
+            }catch(InterruptedException e){
+                e.printStackTrace();
+            }
 
+        }
+        else if(currentState == GameState.state_GameOverState){
+            System.out.println("Game Over!!!");
         }
     }
+
+
+    // TIMER Methods
+    public void createTimer(){
+
+        timer = new Timer(1000, (ae) -> {
+            if (timeRemainingInSeconds > 0) {
+                timeRemainingInSeconds--; // Decrease time every second
+                timerSeconds = timeRemainingInSeconds % 60; // Seconds part of the timer
+                timerMinutes = timeRemainingInSeconds / 60; // Minutes part of the timer
+                System.out.println(String.format("Time Remaining: %02d:%02d", timerMinutes, timerSeconds)); // Print remaining time
+            } else {
+                // When time is up, stop the timer and handle the game over
+                System.out.println("Time's up! Game Over!");
+                currentState = GameState.state_GameOverState;
+                timer.stop(); // Stop the countdown timer
+                // Trigger game over actions, you can also add additional code here
+            }
+
+        });
+        timer.setDelay(1000);
+    }
+    public void startTimer() throws NullPointerException{
+        try{
+            if(timer == null){
+                throw new NullPointerException("Timer is Null!, Instantiate it first!");
+            }
+            else {
+                timer.start();
+            }
+
+        }catch(NullPointerException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+    public void pauseTimer() throws NullPointerException{
+        try{
+            if(timer == null){
+                throw new NullPointerException("Timer is Null!, Instantiate it first!");
+            }
+            else {
+                timer.stop();
+            }
+
+        }catch(NullPointerException e){
+            System.out.println(e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
+
 
 
     public void getMousePos(){
@@ -85,6 +158,14 @@ public class GameLogic{
         }
     }
 
+
+    public GameMap getGameMap() {
+        return gameMap;
+    }
+
+    public void setGameMap(GameMap gameMap) {
+        this.gameMap = gameMap;
+    }
 
     public KeyHandler getKeyH() {
         return keyH;
