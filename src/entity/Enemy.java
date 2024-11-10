@@ -2,7 +2,7 @@ package entity;
 
 public class Enemy extends Entity implements Actionable{
     private String hostility;
-    private float diff_multiplier = 0.9f;
+    private float diff_multiplier;
 
 
 
@@ -11,10 +11,6 @@ public class Enemy extends Entity implements Actionable{
         this.hostility = hostility;
         this.diff_multiplier = diff_multiplier;
     }
-
-
-
-
 
 
     @Override
