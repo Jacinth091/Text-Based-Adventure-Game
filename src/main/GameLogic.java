@@ -16,19 +16,22 @@ import java.util.ArrayList;
 public class GameLogic{
 
 
-    // Threads
-    private final EnemySpawnerThread enemySpawner = new EnemySpawnerThread(this);
+    // Threads and Timers
+    private  EnemySpawnerThread enemySpawner;
     private Timer timer;
-    private long timeRemainingInSeconds = 30 * 60;
-    private long timerMinutes = 30;
+    private long timeElapsedInSeconds =0;
+    private long timerMinutes = 0;
+    private long timerSeconds = 0;
+
 
     private final Utility util = new Utility();
+
+    // GameStates & GameUpdates
     private GameState currentState;
     private final ArrayList<GameUpdate> updates = new ArrayList<>();
 
     // Entities
     private final Player player = new Player("Cedric", "Researcher");
-    private long timerSeconds = 0;
 
 
     private  MouseHandler mouseIn;
@@ -39,6 +42,7 @@ public class GameLogic{
 
     public GameLogic(){
         this.gameMap = new GameMap();
+        this.enemySpawner = new EnemySpawnerThread(this);
         currentState = GameState.state_PlayState;
         createTimer();
         enemySpawner.start();
@@ -51,20 +55,16 @@ public class GameLogic{
     }
 
 
-
-    public void update(){
-        updateGameState();
-    }
-
-
-
-
+    // Update Methods
     public void updateGameState(){
-        notifyGameUpdates();
 
         if(currentState == GameState.state_PlayState){
             getMousePos();
-            startTimer();
+            if(!timer.isRunning()){
+                startTimer();
+
+            }
+            notifyGameUpdates();
 
         }
         else if(currentState == GameState.state_PauseState){
@@ -81,18 +81,29 @@ public class GameLogic{
             System.out.println("Game Over!!!");
         }
     }
+    public void update(){
+        updateGameState();
+    }
+    public void addEventUpdate(GameUpdate eventUpdate){
+        updates.add(eventUpdate);
+    }
+    public void notifyGameUpdates(){
+        for(GameUpdate eventUpdates : updates){
+            eventUpdates.update();
+        }
+    }
 
 
     // TIMER Methods
     public void createTimer(){
 
         timer = new Timer(1000, (ae) -> {
-            if (timeRemainingInSeconds > 0) {
-                timeRemainingInSeconds--; // Decrease time every second
-                timerSeconds = timeRemainingInSeconds % 60; // Seconds part of the timer
-                timerMinutes = timeRemainingInSeconds / 60; // Minutes part of the timer
-                System.out.println(String.format("Time Remaining: %02d:%02d", timerMinutes, timerSeconds)); // Print remaining time
-            } else {
+            timeElapsedInSeconds++; // Decrease time every second
+            timerSeconds = timeElapsedInSeconds % 60; // Seconds part of the timer
+            timerMinutes = timeElapsedInSeconds / 60; // Minutes part of the timer
+            System.out.println(String.format("Time Remaining: %02d:%02d", timerMinutes, timerSeconds)); // Print remaining time
+
+            if(timeElapsedInSeconds >= (1 * 60)){
                 // When time is up, stop the timer and handle the game over
                 System.out.println("Time's up! Game Over!");
                 currentState = GameState.state_GameOverState;
@@ -132,9 +143,7 @@ public class GameLogic{
         }
     }
 
-
-
-
+    // Debug Methods
     public void getMousePos(){
         if(keyH.tKeyPressed){
             String status = mouseIn.isDragging() ? "Dragging" :
@@ -148,17 +157,14 @@ public class GameLogic{
 
     }
 
-    public void addEventUpdate(GameUpdate eventUpdate){
-        updates.add(eventUpdate);
-    }
-
-    public void notifyGameUpdates(){
-        for(GameUpdate eventUpdates : updates){
-            eventUpdates.update();
-        }
-    }
 
 
+
+
+
+
+
+    // Getters and Setters
     public GameMap getGameMap() {
         return gameMap;
     }
@@ -187,5 +193,19 @@ public class GameLogic{
         this.currentState = currentState;
     }
 
+    public long getTimerMinutes() {
+        return timerMinutes;
+    }
 
+    public long getTimeElapsedInSeconds() {
+        return timeElapsedInSeconds;
+    }
+
+    public long getTimerSeconds() {
+        return timerSeconds;
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
 }
