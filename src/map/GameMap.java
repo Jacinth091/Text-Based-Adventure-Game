@@ -25,9 +25,12 @@ public class GameMap {
             "South",
     };
 
+    private String startingPoint;
+
     public GameMap(){
         this.gameMap = new HashMap<>();
         this.rooms = new Room[roomNames.length];
+        startingPoint = roomNames[0];
 
 
         setGameMap();
@@ -135,11 +138,19 @@ public class GameMap {
     }
 
 
+    public String[] getRoomNames() {
+        return roomNames;
+    }
+
     public Room[] getRooms() {
         return rooms;
     }
 
-    public void setRooms(Room[] rooms) {
-        this.rooms = rooms;
+    public String[] getDirection() {
+        return direction;
+    }
+
+    public String getStartingPoint() {
+        return startingPoint;
     }
 }

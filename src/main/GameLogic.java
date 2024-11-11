@@ -41,10 +41,33 @@ public class GameLogic{
     // Game Map
     private GameMap gameMap;
 
+
+    // Game Player defaults
+
+
+    // Labels or actions for each set
+
+    private String[] directions ;
+    private String[] playerActions = {
+            "Search for Item",
+            "Search for Enemy",
+            "Attack",
+            "Restore Status",
+            "Use Item",
+            "Escape",
+
+    };
+    private String spawnPoint;
+    private String currentLocation;
+
     public GameLogic(){
-        this.gameMap = new GameMap();
-        this.enemySpawner = new EnemySpawnerThread(this);
         currentState = GameState.state_PlayState;
+        this.gameMap = new GameMap();
+        this.directions = gameMap.getDirection();
+        this.spawnPoint = gameMap.getRoomNames()[0];
+        currentLocation = spawnPoint;
+
+        this.enemySpawner = new EnemySpawnerThread(this);
         createTimer();
         enemySpawner.start();
 
@@ -54,6 +77,13 @@ public class GameLogic{
 
 
     }
+
+
+
+
+
+
+
 
 
     // Update Methods
@@ -169,8 +199,8 @@ public class GameLogic{
         return gameMap;
     }
 
-    public void setGameMap(GameMap gameMap) {
-        this.gameMap = gameMap;
+    public String[] getDirections() {
+        return directions;
     }
 
     public KeyHandler getKeyH() {
@@ -213,4 +243,7 @@ public class GameLogic{
         return totalGameTime;
     }
 
+    public String[] getPlayerActions() {
+        return playerActions;
+    }
 }
