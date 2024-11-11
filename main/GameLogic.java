@@ -19,6 +19,7 @@ public class GameLogic{
     // Threads and Timers
     private  EnemySpawnerThread enemySpawner;
     private Timer timer;
+    private int totalGameTime = 15 * 60;
     private long timeElapsedInSeconds =0;
     private long timerMinutes = 0;
     private long timerSeconds = 0;
@@ -98,21 +99,20 @@ public class GameLogic{
     public void createTimer(){
 
         timer = new Timer(1000, (ae) -> {
-            timeElapsedInSeconds++; // Decrease time every second
+            timeElapsedInSeconds++; // Increase time every second
             timerSeconds = timeElapsedInSeconds % 60; // Seconds part of the timer
             timerMinutes = timeElapsedInSeconds / 60; // Minutes part of the timer
             System.out.println(String.format("Time Remaining: %02d:%02d", timerMinutes, timerSeconds)); // Print remaining time
 
-            if(timeElapsedInSeconds >= (30 * 60)){
+            if(timeElapsedInSeconds >= totalGameTime){
                 // When time is up, stop the timer and handle the game over
                 System.out.println("Time's up! Game Over!");
                 currentState = GameState.state_GameOverState;
                 timer.stop(); // Stop the countdown timer
-                // Trigger game over actions, you can also add additional code here
             }
 
         });
-        timer.setDelay(1);
+        timer.setDelay(1000);
     }
     public void startTimer() throws NullPointerException{
         try{
@@ -208,4 +208,9 @@ public class GameLogic{
     public Timer getTimer() {
         return timer;
     }
+    
+    public long getTotalGameTime() {
+        return totalGameTime;
+    }
+    
 }
