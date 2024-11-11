@@ -103,7 +103,7 @@ public class GameLogic{
             timerMinutes = timeElapsedInSeconds / 60; // Minutes part of the timer
             System.out.println(String.format("Time Remaining: %02d:%02d", timerMinutes, timerSeconds)); // Print remaining time
 
-            if(timeElapsedInSeconds >= (1 * 60)){
+            if(timeElapsedInSeconds >= (30 * 60)){
                 // When time is up, stop the timer and handle the game over
                 System.out.println("Time's up! Game Over!");
                 currentState = GameState.state_GameOverState;
@@ -112,7 +112,7 @@ public class GameLogic{
             }
 
         });
-        timer.setDelay(1000);
+        timer.setDelay(1);
     }
     public void startTimer() throws NullPointerException{
         try{
