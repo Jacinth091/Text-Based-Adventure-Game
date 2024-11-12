@@ -180,10 +180,20 @@ public class GamePanel extends UI implements GameUpdate, ActionListener, ItemLis
             }
         }
 
+
+
+
+
+
         infoLabels = new JLabel[2];
         for (int i = 0; i < infoLabels.length; i++) {
-            infoLabels[i] = util.createLabel(Color.BLUE);
+            infoLabels[i] = util.createLabel(null);
         }
+        String labelCurLoc = String.format("Location: %s", getGameLogic().getPlayer().getCurrentLocation());
+        infoLabels[0].setText(util.formatText(labelCurLoc,Color.WHITE,13, true,"center"));
+
+        String labelCurWeap = String.format("Weapon: %s", getGameLogic().getPlayer().getWeapon());
+        infoLabels[1].setText(util.formatText(labelCurWeap,Color.WHITE,13, true,"center"));
 
         // Add buttons and panels to choicesPanel
         choicesButtonPanel[1].add(choicesButtons[1][0]);
@@ -220,14 +230,30 @@ public class GamePanel extends UI implements GameUpdate, ActionListener, ItemLis
         }
     }
 
+
+    public void updateUIElements(){
+        // Label
+        String labelCurLoc = String.format("Location: %s", getGameLogic().getPlayer().getCurrentLocation());
+        infoLabels[0].setText(util.formatText(labelCurLoc,Color.WHITE,13, true,"center"));
+        String labelCurWeap = String.format("Weapon: %s", getGameLogic().getPlayer().getWeapon());
+        infoLabels[1].setText(util.formatText(labelCurWeap,Color.WHITE,13, true,"center"));
+
+
+    }
+
     @Override
     public void update() {
+        updateUIElements();
         repaint();
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         btnEventSwitch(e);
+
+        getGameLogic().actionPerformed(e);
+
+
     }
 
     @Override

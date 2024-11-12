@@ -1,12 +1,17 @@
 package entity;
 
-public class Player extends Entity implements Actionable {
+import main.GameLogic;
 
+public class Player extends Entity implements Actionable {
     private int maxSanity = 100;
     private int maxHealth = 100; // Added a max health constant for consistency
 
     private int playerHealth;
     private int playerSanity;
+
+
+    private String weapon;
+    private String currentLocation;
 
 
     // Constructor with default stats
@@ -23,7 +28,16 @@ public class Player extends Entity implements Actionable {
 
     }
 
+
+
+
+    @Override
+    public void perform() {
+        decreaseSanity(5);
+    }
     // Method to reset stats to default values
+
+
     public void setDefaultStats() {
         playerHealth = maxHealth;
         playerSanity = maxSanity;
@@ -34,14 +48,29 @@ public class Player extends Entity implements Actionable {
         setDefaultStats();
     }
 
-    @Override
-    public void perform() {
-        decreaseSanity(5);
+
+
+    // Helper methods for stat adjustments
+    public void increaseHealth(int amount) {
+        setPlayerHealth(this.playerHealth + amount);
+    }
+
+    public void decreaseHealth(int amount) {
+        setPlayerHealth(this.playerHealth - amount);
+    }
+
+    public void increaseSanity(int amount) {
+        setPlayerSanity(this.playerSanity + amount);
+    }
+
+    public void decreaseSanity(int amount) {
+
+        setPlayerSanity(this.playerSanity - amount);
     }
 
 
-
     // Getters and setters with value limits
+
     public int getPlayerSanity() {
         return playerSanity;
     }
@@ -67,23 +96,19 @@ public class Player extends Entity implements Actionable {
         return maxHealth;
     }
 
-    // Helper methods for stat adjustments
-
-    public void increaseHealth(int amount) {
-        setPlayerHealth(this.playerHealth + amount);
+    public String getCurrentLocation() {
+        return currentLocation;
     }
 
-    public void decreaseHealth(int amount) {
-        setPlayerHealth(this.playerHealth - amount);
+    public void setCurrentLocation(String currentLocation) {
+        this.currentLocation = currentLocation;
     }
 
-    public void increaseSanity(int amount) {
-        setPlayerSanity(this.playerSanity + amount);
+    public String getWeapon() {
+        return weapon;
     }
 
-    public void decreaseSanity(int amount) {
-        setPlayerSanity(this.playerSanity - amount);
+    public void setWeapon(String weapon) {
+        this.weapon = weapon;
     }
-
-
 }

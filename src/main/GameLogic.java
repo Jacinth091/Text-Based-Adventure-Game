@@ -9,11 +9,13 @@ import userInput.KeyHandler;
 import userInput.MouseHandler;
 
 import javax.swing.Timer;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 
 
-public class GameLogic{
+public class GameLogic implements ActionListener{
 
 
     // Threads and Timers
@@ -42,7 +44,8 @@ public class GameLogic{
     private GameMap gameMap;
 
 
-    // Game Player defaults
+    // Player Events
+    private PlayerEvents playerEvents;
 
 
     // Labels or actions for each set
@@ -57,26 +60,39 @@ public class GameLogic{
             "Escape",
 
     };
-    private String spawnPoint;
-    private String currentLocation;
+
 
     public GameLogic(){
         currentState = GameState.state_PlayState;
+
+
+        this.playerEvents = new PlayerEvents(this, player);
         this.gameMap = new GameMap();
         this.directions = gameMap.getDirection();
-        this.spawnPoint = gameMap.getRoomNames()[0];
-        currentLocation = spawnPoint;
-
         this.enemySpawner = new EnemySpawnerThread(this);
+        mouseIn = new MouseHandler(this);
+        keyH = new KeyHandler(this);
+        player.setCurrentLocation(gameMap.getStartingPoint());
+        player.setWeapon("None");
+
+
+
         createTimer();
         enemySpawner.start();
 
-        mouseIn = new MouseHandler(this);
-        keyH = new KeyHandler(this);
+
 
 
 
     }
+
+
+    // Gameplay Logic
+    @Override
+    public void actionPerformed(ActionEvent ae){
+        playerEvents.actionPerformed(ae);
+    }
+
 
 
 
@@ -96,6 +112,7 @@ public class GameLogic{
 
             }
             notifyGameUpdates();
+//            updatePlayer();
 
         }
         else if(currentState == GameState.state_PauseState){
@@ -123,6 +140,10 @@ public class GameLogic{
             eventUpdates.update();
         }
     }
+
+//    public void updatePlayer(){
+//        player.setCurrentLocation(playerEvents.getNewLoc());
+//    }
 
 
     // TIMER Methods
@@ -246,4 +267,5 @@ public class GameLogic{
     public String[] getPlayerActions() {
         return playerActions;
     }
+
 }
