@@ -141,10 +141,13 @@ public class GameLogic implements ActionListener{
         }
     }
 
-//    public void updatePlayer(){
-//        player.setCurrentLocation(playerEvents.getNewLoc());
-//    }
+    public String getCurrentLocation(){
+        return player.getCurrentLocation();
+    }
 
+    public void setCurrentLocation(String newLocation){
+        player.setCurrentLocation(newLocation);
+    }
 
     // TIMER Methods
     public void createTimer(){
@@ -153,7 +156,8 @@ public class GameLogic implements ActionListener{
             timeElapsedInSeconds++; // Increase time every second
             timerSeconds = timeElapsedInSeconds % 60; // Seconds part of the timer
             timerMinutes = timeElapsedInSeconds / 60; // Minutes part of the timer
-            System.out.println(String.format("Time Remaining: %02d:%02d", timerMinutes, timerSeconds)); // Print remaining time
+            System.out.println(player.getCurrentLocation());
+//            System.out.println(String.format("Time Remaining: %02d:%02d", timerMinutes, timerSeconds)); // Print remaining time
 
             if(timeElapsedInSeconds >= totalGameTime){
                 // When time is up, stop the timer and handle the game over
@@ -267,5 +271,6 @@ public class GameLogic implements ActionListener{
     public String[] getPlayerActions() {
         return playerActions;
     }
+
 
 }

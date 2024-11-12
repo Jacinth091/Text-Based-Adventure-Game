@@ -41,12 +41,22 @@ public class GamePanel extends UI implements GameUpdate, ActionListener, ItemLis
     private JButton[][] choicesButtons;
     private JLabel[] infoLabels;
 
+
+
+    private String playerLocation;
+    private String playerWeapon;
+
     public GamePanel(GameLogic gameLogic) {
         super(gameLogic);
         getGameLogic().addEventUpdate(this);
         maxScreenRow = 15;
         this.screenHeight = tileSize * maxScreenRow;
         this.setPreferredSize(new Dimension(screenWidth, this.screenHeight));
+
+        this.playerLocation = getGameLogic().getPlayer().getCurrentLocation();
+        this.playerWeapon = getGameLogic().getPlayer().getWeapon();
+
+
         initComponent();
     }
 
@@ -189,10 +199,10 @@ public class GamePanel extends UI implements GameUpdate, ActionListener, ItemLis
         for (int i = 0; i < infoLabels.length; i++) {
             infoLabels[i] = util.createLabel(null);
         }
-        String labelCurLoc = String.format("Location: %s", getGameLogic().getPlayer().getCurrentLocation());
+        String labelCurLoc = String.format("Location: %s", playerLocation);
         infoLabels[0].setText(util.formatText(labelCurLoc,Color.WHITE,13, true,"center"));
 
-        String labelCurWeap = String.format("Weapon: %s", getGameLogic().getPlayer().getWeapon());
+        String labelCurWeap = String.format("Weapon: %s", playerWeapon);
         infoLabels[1].setText(util.formatText(labelCurWeap,Color.WHITE,13, true,"center"));
 
         // Add buttons and panels to choicesPanel
@@ -233,17 +243,24 @@ public class GamePanel extends UI implements GameUpdate, ActionListener, ItemLis
 
     public void updateUIElements(){
         // Label
-        String labelCurLoc = String.format("Location: %s", getGameLogic().getPlayer().getCurrentLocation());
+//        String labelCurLoc = String.format("Location: %s", getGameLogic().getPlayer().getCurrentLocation());
+//        infoLabels[0].setText(util.formatText(labelCurLoc,Color.WHITE,13, true,"center"));
+//        String labelCurWeap = String.format("Weapon: %s", getGameLogic().getPlayer().getWeapon());
+//        infoLabels[1].setText(util.formatText(labelCurWeap,Color.WHITE,13, true,"center"));
+        playerLocation = getGameLogic().getCurrentLocation();
+//        playerWeapon = getGameLogic().getWeapon();
+        String labelCurLoc = String.format("Location: %s", playerLocation);
         infoLabels[0].setText(util.formatText(labelCurLoc,Color.WHITE,13, true,"center"));
-        String labelCurWeap = String.format("Weapon: %s", getGameLogic().getPlayer().getWeapon());
+
+        String labelCurWeap = String.format("Weapon: %s", playerWeapon);
         infoLabels[1].setText(util.formatText(labelCurWeap,Color.WHITE,13, true,"center"));
-
-
     }
 
     @Override
     public void update() {
         updateUIElements();
+//        System.out.println("GamePanel: "+playerLocation);
+
         repaint();
     }
 

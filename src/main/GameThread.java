@@ -3,7 +3,7 @@ package main;
 public class GameThread implements Runnable {
 
     private Thread gameThread;
-    private final int FPS = 24;
+    private final int FPS = 1;
 
     private final GameLogic gameLogic;
 
@@ -23,6 +23,10 @@ public class GameThread implements Runnable {
     @Override
     public void run() {
         gameLoop();
+    }
+
+    public void gameLoopTimer(){
+
     }
 
 

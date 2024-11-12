@@ -51,7 +51,7 @@ public class PlayerEvents implements ActionListener {
                 if (nextRoom != null) {
                     System.out.println("Player moves to: " + nextRoomName);
                     newLoc = nextRoomName;
-
+                    gameLogic.setCurrentLocation(newLoc);
                 } else {
                     System.out.println("The room in direction " + direction + " does not exist.");
                 }
@@ -67,8 +67,5 @@ public class PlayerEvents implements ActionListener {
 
     }
 
-    public String getNewLoc(){
-        return newLoc;
-    }
 
 }

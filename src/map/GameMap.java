@@ -97,7 +97,7 @@ public class GameMap {
     public void setArmoryRoom(){
 
         // Armory
-        rooms[3].addConnection(direction[2],roomNames[2]);
+        rooms[3].addConnection(direction[1],roomNames[2]);
 
     }
 
