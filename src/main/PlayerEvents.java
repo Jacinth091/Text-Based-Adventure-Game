@@ -3,6 +3,7 @@ package main;
 import entity.Player;
 import map.Room;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
@@ -12,6 +13,9 @@ public class PlayerEvents implements ActionListener {
     private Player player;
 
     private String newLoc;
+    private boolean flagValue;
+
+
 
 
     public PlayerEvents(GameLogic gameLogic, Player player){
@@ -28,25 +32,39 @@ public class PlayerEvents implements ActionListener {
 
         String playerChoice = event.getActionCommand();
 
-        System.out.println(playerChoice);
+        if(checkDirection(playerChoice)){
 
-        playerMoveInMap(player.getCurrentLocation(), playerChoice);
+            playerMoveInMap(player.getCurrentLocation(), playerChoice);
+
+        }
+        else {
+            System.out.println(playerChoice);
+        }
+
 
 
 
     }
 
+    public boolean checkDirection(String key){
+        return key.equalsIgnoreCase("north") ||
+                key.equalsIgnoreCase("east") ||
+                key.equalsIgnoreCase("west") ||
+                key.equalsIgnoreCase("south");
+    }
 
     public void playerMoveInMap(String currentLocation, String direction){
         Map<String, Room> map = gameLogic.getGameMap().getMap();
-        // Find the current room using the current location
-        Room currentRoom = map.get(currentLocation);
+
+
+
+        Room currentRoom = map.get(currentLocation); // current Room
+
         if (currentRoom != null) {
             // Get the next room's name based on the direction
             String nextRoomName = currentRoom.getRoomViaDirection(direction);
 
             if (nextRoomName != null) {
-                // Retrieve the actual Room object for the next location
                 Room nextRoom = map.get(nextRoomName);
                 if (nextRoom != null) {
                     System.out.println("Player moves to: " + nextRoomName);

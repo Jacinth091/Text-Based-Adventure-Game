@@ -44,9 +44,10 @@ public class GameLogic implements ActionListener{
     private GameMap gameMap;
 
 
-    // Player Events
+    // ------------------------ Player ------------------------
     private PlayerEvents playerEvents;
-
+    private boolean isEncounter;
+    private int noOfKeys =0;
 
     // Labels or actions for each set
 
@@ -125,6 +126,11 @@ public class GameLogic implements ActionListener{
             }
 
         }
+        else if(currentState == GameState.state_EncounterState){
+            System.out.println("Encounter!!!");
+            pauseTimer();
+
+        }
         else if(currentState == GameState.state_GameOverState){
             System.out.println("Game Over!!!");
         }
@@ -156,8 +162,13 @@ public class GameLogic implements ActionListener{
             timeElapsedInSeconds++; // Increase time every second
             timerSeconds = timeElapsedInSeconds % 60; // Seconds part of the timer
             timerMinutes = timeElapsedInSeconds / 60; // Minutes part of the timer
-            System.out.println(player.getCurrentLocation());
+//            System.out.println(player.getCurrentLocation());
 //            System.out.println(String.format("Time Remaining: %02d:%02d", timerMinutes, timerSeconds)); // Print remaining time
+            System.out.println(timeElapsedInSeconds);
+
+            if(timeElapsedInSeconds == 10){
+                currentState = GameState.state_EncounterState;
+            }
 
             if(timeElapsedInSeconds >= totalGameTime){
                 // When time is up, stop the timer and handle the game over
