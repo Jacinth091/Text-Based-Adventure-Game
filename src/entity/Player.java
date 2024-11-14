@@ -37,8 +37,11 @@ public class Player extends Entity implements Actionable {
 
 
     public void setDefaultStats() {
-        playerHealth = maxHealth;
-        playerSanity = maxSanity;
+//        playerHealth = maxHealth;
+//        playerSanity = maxSanity;
+
+        playerHealth = 20;
+        playerSanity = 30;
 
     }
 

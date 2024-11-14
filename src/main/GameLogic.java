@@ -77,6 +77,12 @@ public class GameLogic implements ActionListener{
     }
 
 
+    public void update(){
+
+
+
+
+    }
 
 
 

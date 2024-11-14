@@ -1,3 +1,4 @@
+/*
 package userInput;
 
 
@@ -96,3 +97,4 @@ public class MouseHandler implements MouseListener, MouseMotionListener {
         return mouseX;
     }
 }
+*/

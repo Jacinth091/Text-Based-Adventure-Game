@@ -295,15 +295,16 @@ public class GamePanel extends UI implements GameUpdate, ActionListener, ItemLis
         // Label
         currState = getGameLogic().getmGThread().getCurrentState();
         playerLocation = getGameLogic().getCurrentLocation();
+
         String labelCurLoc = String.format("Location: %s", playerLocation);
         infoLabels[0].setText(util.formatText(labelCurLoc,Color.WHITE,13, true,"center"));
-//        String labelCurWeap = String.format("Weapon: %s", playerWeapon);
+
         String labelCurWeap = String.format("Weapon: %s", String.valueOf(count++));
         infoLabels[1].setText(util.formatText(labelCurWeap,Color.WHITE,13, true,"center"));
 
-        System.out.println("Game Panel: " + currState);
+//        System.out.println("Game Panel: " + currState);
         if(getGameLogic().getmGThread().getCurrentState().equals(GameState.state_PauseState)){
-            System.out.println("GAmePanel: Pause");
+//            System.out.println("GAmePanel: Pause");
             choicesPanel[0].setVisible(false);
             revalidate();
             repaint();

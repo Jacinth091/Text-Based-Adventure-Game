@@ -14,18 +14,20 @@ import java.awt.event.ItemListener;
 public class GameHud extends UI implements GameUpdate, ActionListener, ItemListener {
     public int screenHeight;
 
-    //Test Stats
-    int hp =100;
-    int sanity =76;
-    int max =100;
-    private PlayerStats plyStats;
+
+    private PlayerStats playerStats;
     // Ui Elements
     private JPanel parentCont;
 
 
+
+
+
+
     public GameHud(GameLogic gameLogic){
         super(gameLogic);
-        this.plyStats = new PlayerStats(gameLogic);
+        gbc = new GridBagConstraints();
+        this.playerStats = new PlayerStats(gameLogic);
         getGameLogic().getmGThread().addEventUpdate(this);
         maxScreenRow = 3;
         this.screenHeight = tileSize * maxScreenRow;
@@ -36,6 +38,8 @@ public class GameHud extends UI implements GameUpdate, ActionListener, ItemListe
 
     }
 
+
+
     public void initComponents(){
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
@@ -43,7 +47,9 @@ public class GameHud extends UI implements GameUpdate, ActionListener, ItemListe
 
 
         Color opaque = new Color(231, 231, 231, 107);
-        parentCont = util.createPanel(opaque, new GridBagLayout(),true);
+        parentCont = util.createPanel(null, new GridBagLayout(), true);
+        parentCont.setOpaque(true); // Ensure the parent panel is opaque
+        playerStats.setOpaque(true); // Ensure playerStats panel is also opaque
 
 
 
@@ -51,13 +57,12 @@ public class GameHud extends UI implements GameUpdate, ActionListener, ItemListe
 
 
 
-        gbc = new GridBagConstraints();
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.weightx = 1.0;          // Expand horizontally
         gbc.weighty = 1.0;          // Take available vertical space
         gbc.fill = GridBagConstraints.BOTH;
-        parentCont.add(plyStats, gbc);
+        parentCont.add(playerStats, gbc);
 
 
 
@@ -75,9 +80,13 @@ public class GameHud extends UI implements GameUpdate, ActionListener, ItemListe
 
 
 
+
+
+
+
     @Override
     public synchronized void update() {
-
+        playerStats.update();
     }
 
     @Override
@@ -93,64 +102,3 @@ public class GameHud extends UI implements GameUpdate, ActionListener, ItemListe
 }
 
 
-class PlayerStats extends UI implements GameUpdate{
-
-    private Graphics2D g2;
-    private Player player;
-    private int screenHeight;
-    private int screenWidth;
-
-
-
-    public PlayerStats(GameLogic gameLogic) {
-        super(gameLogic);
-        maxScreenRow = 20;
-        maxScreenCol = 20;
-        this.screenHeight = tileSize * maxScreenRow;
-        this.screenWidth  = tileSize * maxScreenCol;
-
-
-        initComponents();
-    }
-
-    public void initComponents(){
-        this.setPreferredSize(new Dimension(500,500));
-        setLayout(null);
-        setBackground(Color.BLACK);
-        setBorder(util.createLineBorder(Color.WHITE, 1));
-//        System.out.println("Beta Branch");
-
-
-
-
-
-
-
-
-    }
-
-
-
-    public void paintComponent(Graphics g){
-        super.paintComponent(g);
-        Graphics2D g2 = (Graphics2D) g;
-
-
-
-        g2.dispose();
-
-    }
-
-    public void draw(Graphics2D g2){
-        this.g2 = g2;
-//        player = getGameLogic().getPlayer();
-
-
-
-    }
-
-    @Override
-    public void update() {
-
-    }
-}

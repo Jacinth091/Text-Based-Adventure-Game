@@ -3,13 +3,14 @@ package updates;
 import events.GameState;
 import events.GameUpdate;
 import main.GameTimer;
+//import main.PlayerStats;
 
 import javax.swing.*;
 import java.util.ArrayList;
 public class GameThread implements Runnable {
 
     private Thread mainThread;
-    private final int FPS = 24;
+    private final int FPS = 10;
     private GameTimer playTime;
     private GameState currentState;
     private final ArrayList<GameUpdate> updates = new ArrayList<>();
@@ -98,11 +99,9 @@ public class GameThread implements Runnable {
     public synchronized void update() {
         notifyGameUpdates();
         updateGameState();
-        System.out.println(currentState);
+//        System.out.println(currentState);
 
-        if (playTime.getTimeElapsedInSeconds() == 5) {
-            setGameState(GameState.state_PauseState);
-        }
+
     }
 
     public void addEventUpdate(GameUpdate eventUpdate) {
@@ -135,5 +134,9 @@ public class GameThread implements Runnable {
 
     public GameState getCurrentState() {
         return currentState;
+    }
+
+    public GameTimer getPlayTime() {
+        return playTime;
     }
 }
