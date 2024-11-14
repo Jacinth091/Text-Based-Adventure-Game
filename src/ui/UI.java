@@ -1,6 +1,7 @@
 package ui;
 
 import main.GameLogic;
+import updates.GameThread;
 
 import javax.swing.*;
 import java.awt.*;
@@ -34,10 +35,10 @@ public class UI extends JPanel {
         this.setFocusable(true);
         this.setLayout(new BorderLayout());
 
-        // Listeners
-        this.addKeyListener(gameLogic.getKeyH());
-        this.addMouseListener(gameLogic.getMouseIn());
-        this.addMouseMotionListener(gameLogic.getMouseIn());
+//        // Listeners
+//        this.addKeyListener(gameLogic.getKeyH());
+//        this.addMouseListener(gameLogic.getMouseIn());
+//        this.addMouseMotionListener(gameLogic.getMouseIn());
 
     }
 

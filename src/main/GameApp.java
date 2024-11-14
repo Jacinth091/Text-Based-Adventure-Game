@@ -2,6 +2,7 @@ package main;
 
 import ui.UI;
 import ui.Utility;
+import updates.EnemySpawnerThread;
 
 import javax.swing.*;
 import java.awt.*;

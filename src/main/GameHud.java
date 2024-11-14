@@ -3,7 +3,6 @@ package main;
 import entity.Player;
 import events.GameUpdate;
 import ui.UI;
-import ui.Utility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,7 +26,7 @@ public class GameHud extends UI implements GameUpdate, ActionListener, ItemListe
     public GameHud(GameLogic gameLogic){
         super(gameLogic);
         this.plyStats = new PlayerStats(gameLogic);
-        getGameLogic().addEventUpdate(this);
+        getGameLogic().getmGThread().addEventUpdate(this);
         maxScreenRow = 3;
         this.screenHeight = tileSize * maxScreenRow;
         this.setPreferredSize(new Dimension(screenWidth, this.screenHeight));
@@ -77,7 +76,7 @@ public class GameHud extends UI implements GameUpdate, ActionListener, ItemListe
 
 
     @Override
-    public void update() {
+    public synchronized void update() {
 
     }
 
@@ -144,7 +143,7 @@ class PlayerStats extends UI implements GameUpdate{
 
     public void draw(Graphics2D g2){
         this.g2 = g2;
-        player = getGameLogic().getPlayer();
+//        player = getGameLogic().getPlayer();
 
 
 

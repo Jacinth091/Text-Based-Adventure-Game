@@ -16,7 +16,7 @@ public class GameMap {
             "Containment Area",
             "Facility Exit",
     };
-    private Map<String, Room> gameMap;
+    private Map<String, Room> map;
     private Room[] rooms;
     private String[] direction = {
             "North",
@@ -25,9 +25,12 @@ public class GameMap {
             "South",
     };
 
+    private String startingPoint;
+
     public GameMap(){
-        this.gameMap = new HashMap<>();
+        this.map = new HashMap<>();
         this.rooms = new Room[roomNames.length];
+        startingPoint = roomNames[0];
 
 
         setGameMap();
@@ -42,7 +45,7 @@ public class GameMap {
 
         for(int i =0; i < rooms.length; i++){
             rooms[i] = new Room();
-            gameMap.put(roomNames[i], rooms[i]);
+            map.put(roomNames[i], rooms[i]);
         }
 
 
@@ -59,8 +62,8 @@ public class GameMap {
 
     public void debugMap(){
         for(String roomName : roomNames){
-            System.out.println("Current Room: " + roomName + "\nIs initialized?: " + ((gameMap.containsKey(roomName)) ? "Yes" : "NO") );
-            System.out.println(gameMap.get(roomName).getMapConnections() + "\n");
+            System.out.println("Current Room: " + roomName + "\nIs initialized?: " + ((map.containsKey(roomName)) ? "Yes" : "NO") );
+            System.out.println(map.get(roomName).getMapConnections() + "\n");
 
         }
 
@@ -94,7 +97,7 @@ public class GameMap {
     public void setArmoryRoom(){
 
         // Armory
-        rooms[3].addConnection(direction[2],roomNames[2]);
+        rooms[3].addConnection(direction[1],roomNames[2]);
 
     }
 
@@ -135,11 +138,23 @@ public class GameMap {
     }
 
 
+    public String[] getRoomNames() {
+        return roomNames;
+    }
+
     public Room[] getRooms() {
         return rooms;
     }
 
-    public void setRooms(Room[] rooms) {
-        this.rooms = rooms;
+    public String[] getDirection() {
+        return direction;
+    }
+
+    public String getStartingPoint() {
+        return startingPoint;
+    }
+
+    public Map<String, Room> getMap() {
+        return map;
     }
 }
