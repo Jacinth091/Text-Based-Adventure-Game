@@ -88,14 +88,14 @@ public class GameLogic implements ActionListener{
     }
 
 
+
+
+
     // Gameplay Logic
     @Override
     public void actionPerformed(ActionEvent ae){
         playerEvents.actionPerformed(ae);
     }
-
-
-
 
 
 
@@ -128,15 +128,18 @@ public class GameLogic implements ActionListener{
         }
         else if(currentState == GameState.state_EncounterState){
             System.out.println("Encounter!!!");
-            pauseTimer();
+//            pauseTimer();
 
         }
         else if(currentState == GameState.state_GameOverState){
             System.out.println("Game Over!!!");
         }
     }
-    public void update(){
+    public synchronized void update(){
         updateGameState();
+        if(timeElapsedInSeconds == 10){
+            currentState = GameState.state_EncounterState;
+        }
     }
     public void addEventUpdate(GameUpdate eventUpdate){
         updates.add(eventUpdate);
@@ -147,13 +150,9 @@ public class GameLogic implements ActionListener{
         }
     }
 
-    public String getCurrentLocation(){
-        return player.getCurrentLocation();
-    }
 
-    public void setCurrentLocation(String newLocation){
-        player.setCurrentLocation(newLocation);
-    }
+
+
 
     // TIMER Methods
     public void createTimer(){
@@ -166,9 +165,6 @@ public class GameLogic implements ActionListener{
 //            System.out.println(String.format("Time Remaining: %02d:%02d", timerMinutes, timerSeconds)); // Print remaining time
             System.out.println(timeElapsedInSeconds);
 
-            if(timeElapsedInSeconds == 10){
-                currentState = GameState.state_EncounterState;
-            }
 
             if(timeElapsedInSeconds >= totalGameTime){
                 // When time is up, stop the timer and handle the game over
@@ -283,5 +279,14 @@ public class GameLogic implements ActionListener{
         return playerActions;
     }
 
+
+
+    public String getCurrentLocation(){
+        return player.getCurrentLocation();
+    }
+
+    public void setCurrentLocation(String newLocation){
+        player.setCurrentLocation(newLocation);
+    }
 
 }

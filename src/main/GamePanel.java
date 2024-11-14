@@ -298,17 +298,10 @@ public class GamePanel extends UI implements GameUpdate, ActionListener, ItemLis
         infoLabels[1].setText(util.formatText(labelCurWeap,Color.WHITE,13, true,"center"));
 
 
-        if(getGameLogic().getCurrentState() == GameState.state_EncounterState){
-            choicesPanel[0].setVisible(false);
-        }
-        else{
-//            choicesPanel[0].setVisible(true);
-
-        }
     }
 
     @Override
-    public void update() {
+    public synchronized void update(){
         updateUIElements();
 //        System.out.println("GamePanel: "+playerLocation);
 

@@ -77,7 +77,7 @@ public class GameHud extends UI implements GameUpdate, ActionListener, ItemListe
 
 
     @Override
-    public void update() {
+    public synchronized void update() {
 
     }
 
